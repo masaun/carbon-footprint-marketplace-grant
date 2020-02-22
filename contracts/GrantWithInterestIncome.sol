@@ -12,7 +12,7 @@ import "./MarketplaceRegistry.sol";
 import "./rtoken-contracts/contracts/RToken.sol";
 
 
-contract GrantForBuyer is Ownable, CfStorage, CfConstants {
+contract GrantWithInterestIncome is Ownable, CfStorage, CfConstants {
 
     RToken public rToken;
 
