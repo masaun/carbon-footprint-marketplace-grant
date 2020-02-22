@@ -1,6 +1,6 @@
 require('dotenv').config();
 
-const HDWalletProvider = require('@truffle/hdwallet-provider');  // @notice - Should new module.
+const HDWalletProvider = require('@truffle/hdwallet-provider');  // @notice - Should use new module.
 const mnemonic = process.env.MNEMONIC;
 
 
