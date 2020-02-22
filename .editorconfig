@@ -1,0 +1,73 @@
+################################################
+#   ╔═╗╔╦╗╦╔╦╗╔═╗╦═╗┌─┐┌─┐┌┐┌┌─┐┬┌─┐
+#   ║╣  ║║║ ║ ║ ║╠╦╝│  │ ││││├┤ ││ ┬
+#  o╚═╝═╩╝╩ ╩ ╚═╝╩╚═└─┘└─┘┘└┘└  ┴└─┘
+#
+# > Formatting conventions for your Sails app.
+#
+# This file (`.editorconfig`) exists to help
+# maintain consistent formatting throughout the
+# files in your Sails app.
+#
+# For the sake of convention, the Sails team's
+# preferred settings are included here out of the
+# box.  You can also change this file to fit your
+# team's preferences (for example, if all of the
+# developers on your team have a strong preference
+# for tabs over spaces),
+#
+# To review what each of these options mean, see:
+# http://editorconfig.org/
+#
+################################################
+root = true
+
+[*]
+end_of_line = lf
+insert_final_newline = true
+charset = utf-8
+indent_style = space
+indent_size = 4
+
+[*.sol]
+indent_style = space
+indent_size = 4
+
+[*.py]
+indent_style = space
+indent_size = 4
+
+[*.rb]
+indent_style = space
+indent_size = 2
+
+[*.java]
+indent_style = space
+indent_size = 4
+
+[*.php]
+indent_style = space
+tab_width = 4
+
+[*.html]
+indent_style = space
+indent_size = 2
+
+[*.js]
+indent_style = space
+indent_size = 2
+
+[*.jsx]
+indent_style = space
+indent_size = 2
+
+[*.css]
+indent_style = space
+indent_size = 2
+
+[*.md]
+trim_trailing_whitespace = false
+
+[{package.json,.travis.yml}]
+indent_style = space
+indent_size = 2
