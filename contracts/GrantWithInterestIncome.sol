@@ -21,21 +21,30 @@ contract GrantWithInterestIncome is Ownable, CfStorage, CfConstants {
     }
 
 
-    function createGrant() public returns (bool) {}
+    function createGrantWithInerestIncom(
+
+    ) public returns (bool) {
+
+    }
 
 
     //
     // rToken interface
     //
 
-    /// @dev IRToken.mint implementation
+    /**
+     * @notice Sender supplies assets into the market and receives rTokens in exchange
+     * @param mintAmount The amount of the underlying asset to supply
+     * @return uint 0=success, otherwise a failure
+     */
     function mintRdai(uint256 _mintAmount) public returns (bool) {
         rToken.mint(_mintAmount);
     }
 
     /**
-     * @dev IRToken.redeem implementation
-     *      It withdraws equal amount of initially supplied underlying assets
+     * @notice Sender redeems rTokens in exchange for the underlying asset
+     * @param redeemTokens The number of rTokens to redeem into underlying
+     * @return uint 0=success, otherwise a failure
      */
     function redeemRdai(uint256 _redeemTokens) public returns (bool) {
         rToken.redeem(_redeemTokens);
