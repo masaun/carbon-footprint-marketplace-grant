@@ -1,6 +1,6 @@
 pragma solidity ^0.5.10;
 
-import "openzeppelin-solidity/contracts/ownership/Ownable.sol";
+import "@openzeppelin/contracts/ownership/Ownable.sol";
 
 // Storage
 import "./storage/CfStorage.sol";
@@ -9,7 +9,7 @@ import "./storage/CfConstants.sol";
 import "./MarketplaceRegistry.sol";
 
 // rDAI
-import "./rtoken-contracts/contracts/RToken.sol";
+//import "./rtoken-contracts/contracts/RToken.sol";
 
 
 contract GrantWithInterestIncome is Ownable, CfStorage, CfConstants {
@@ -17,7 +17,7 @@ contract GrantWithInterestIncome is Ownable, CfStorage, CfConstants {
     RToken public rToken;
 
     constructor(address _rToken) public {
-        rToken = RToken(_rToken);
+        rToken = RToken(_rToken);  // [Ref]: ./rtoken-contracts/contracts/RToken.sol
     }
 
 
