@@ -24,10 +24,13 @@ contract GrantWithInterestIncome is CfStorage, CfConstants {
 
 
     function createGrantWithInerestIncome(uint256 _redeemTokens, address _owner) public returns (bool) {
-        // #1 Redeem rDAI with DAI
+        // #1 Mint rDAI
+        mintRdai(_mintAmount);
+
+        // #2 Redeem rDAI with DAI
         redeemRdai(_redeemTokens);
 
-        // #2 Pay interest income
+        // #3 Pay interest income
         payInterestRdai(_owner);
 
         // #3 In progress
@@ -36,12 +39,31 @@ contract GrantWithInterestIncome is CfStorage, CfConstants {
     }
 
 
+    /////////////////////////////////////////
+    // rToken interface / Basic 3 functions
+    /////////////////////////////////////////
+    function mintRdai(uint256 _mintAmount) public returns (bool) {
+        rToken.mint(_mintAmount);
+        return CfConstants.CONFIRMED;
+    }
+
+    function redeemRdai(uint256 _redeemTokens) public returns (bool) {
+        rToken.redeem(_redeemTokens);
+        return CfConstants.CONFIRMED;
+    }
+
+    function payInterestRdai(address _owner) public returns (bool) {
+        rToken.payInterest(_owner);
+        return CfConstants.CONFIRMED;
+    }
 
 
-    //////////////////////
-    // rToken interface
-    //////////////////////
 
+
+
+    ///////////////////////////////
+    // rToken interface / Others
+    ///////////////////////////////
     /**
      * @notice Returns the name of the token.
      */
@@ -59,28 +81,9 @@ contract GrantWithInterestIncome is CfStorage, CfConstants {
     }
 
 
-
-    function mintRdai(uint256 _mintAmount) public returns (bool) {
-        rToken.mint(_mintAmount);
-        return CfConstants.CONFIRMED;
-    }
-
-
-    function redeemRdai(uint256 _redeemTokens) public returns (bool) {
-        rToken.redeem(_redeemTokens);
-        return CfConstants.CONFIRMED;
-    }
-
-
-    function payInterestRdai(address _owner) public returns (bool) {
-        rToken.payInterest(_owner);
-        return CfConstants.CONFIRMED;
-    }
-
     function underlyingERC20() public returns (bool) {
         compoundAllocationStrategy.underlying();
     }
-    
     
 
 }
