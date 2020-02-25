@@ -18,7 +18,7 @@ contract MarketplaceRegistry is Ownable, CfStorage, CfConstants {
     constructor() public {}
 
     function testFunc() public returns (bool) {
-        return MpConstants.CONFIRMED;
+        return CfConstants.CONFIRMED;
     }   
 
 }
