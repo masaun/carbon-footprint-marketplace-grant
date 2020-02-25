@@ -21,14 +21,24 @@ contract GrantWithInterestIncome is CfStorage, CfConstants {
     }
 
 
-    function createGrantWithInerestIncome() public returns (bool) {
+    function createGrantWithInerestIncome(address _redeemTokens, address _owner) public returns (bool) {
+        // #1 Redeem rDAI with DAI
+        redeemRdai(_redeemTokens);
+
+        // #2 Pay interest income
+        payInterestRdai(_owner);
+
+        // #3 In progress
+
         return CfConstants.CONFIRMED;
     }
 
 
-    //
+
+
+    //////////////////////
     // rToken interface
-    //
+    //////////////////////
 
     /**
      * @notice Returns the name of the token.
@@ -58,5 +68,12 @@ contract GrantWithInterestIncome is CfStorage, CfConstants {
         rToken.redeem(_redeemTokens);
         return CfConstants.CONFIRMED;
     }
+
+
+    function payInterestRdai(address _owner) public returns (bool) {
+        rToken.payInterestRdai(_owner);
+        return CfConstants.CONFIRMED;
+    }
+    
 
 }
