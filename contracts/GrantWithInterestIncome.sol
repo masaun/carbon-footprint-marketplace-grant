@@ -6,15 +6,17 @@ import "./storage/CfConstants.sol";
 
 import "./MarketplaceRegistry.sol";
 
+// cDAI
+import "./rtoken-contracts/contracts/CompoundAllocationStrategy.sol";
 
 // rDAI
-//import "./IRToken.sol";
 import "./rtoken-contracts/contracts/IRToken.sol";
 
 
 contract GrantWithInterestIncome is CfStorage, CfConstants {
 
     IRToken public rToken;
+    CompoundAllocationStrategy public compoundAllocationStrategy;
 
     constructor(address _rToken) public {
         rToken = IRToken(_rToken);  // [Ref]: ./rtoken-contracts/contracts/RToken.sol
@@ -74,6 +76,11 @@ contract GrantWithInterestIncome is CfStorage, CfConstants {
         rToken.payInterest(_owner);
         return CfConstants.CONFIRMED;
     }
+
+    function underlyingERC20() public returns (bool) {
+        compoundAllocationStrategy.underlying();
+    }
+    
     
 
 }
