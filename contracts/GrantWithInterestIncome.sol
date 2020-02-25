@@ -21,7 +21,7 @@ contract GrantWithInterestIncome is CfStorage, CfConstants {
     }
 
 
-    function createGrantWithInerestIncome(address _redeemTokens, address _owner) public returns (bool) {
+    function createGrantWithInerestIncome(uint256 _redeemTokens, address _owner) public returns (bool) {
         // #1 Redeem rDAI with DAI
         redeemRdai(_redeemTokens);
 
@@ -71,7 +71,7 @@ contract GrantWithInterestIncome is CfStorage, CfConstants {
 
 
     function payInterestRdai(address _owner) public returns (bool) {
-        rToken.payInterestRdai(_owner);
+        rToken.payInterest(_owner);
         return CfConstants.CONFIRMED;
     }
     
