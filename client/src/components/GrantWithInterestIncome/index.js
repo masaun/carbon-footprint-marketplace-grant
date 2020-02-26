@@ -15,7 +15,7 @@ import styles from '../../App.module.scss';
 
 
 
-export default class NewBancorPool extends Component {
+export default class GrantWithInterestIncome extends Component {
   constructor(props) {    
     super(props);
 
@@ -44,9 +44,9 @@ export default class NewBancorPool extends Component {
   //////////////////////////////////// 
   ///// Refresh Values
   ////////////////////////////////////
-  refreshValues = (instanceNewBancorPool) => {
-    if (instanceNewBancorPool) {
-      console.log('refreshValues of instanceNewBancorPool');
+  refreshValues = (instanceGrantWithInterestIncome) => {
+    if (instanceGrantWithInterestIncome) {
+      console.log('refreshValues of instanceGrantWithInterestIncome');
     }
   }
 
@@ -71,7 +71,7 @@ export default class NewBancorPool extends Component {
     let MarketplaceRegistry = {};
     try {
       GrantWithInterestIncome = require("../../../../build/contracts/GrantWithInterestIncome.json"); // Load ABI of contract of GrantWithInterestIncome
-      MarketplaceRegistry = require("../../../../build/contracts/MarketplaceRegistry.sol");          // Load artifact-file of MarketplaceRegistry
+      MarketplaceRegistry = require("../../../../build/contracts/MarketplaceRegistry.json");          // Load artifact-file of MarketplaceRegistry
     } catch (e) {
       console.log(e);
     }

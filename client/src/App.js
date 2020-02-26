@@ -61,8 +61,8 @@ componentDidMount = async () => {
     let GrantWithInterestIncome = {};
     let MarketplaceRegistry = {};
     try {
-      GrantWithInterestIncome = require("../../../../build/contracts/GrantWithInterestIncome.json"); // Load ABI of contract of GrantWithInterestIncome
-      MarketplaceRegistry = require("../../../../build/contracts/MarketplaceRegistry.sol");          // Load artifact-file of MarketplaceRegistry
+      GrantWithInterestIncome = require("../../build/contracts/GrantWithInterestIncome.json"); // Load ABI of contract of GrantWithInterestIncome
+      MarketplaceRegistry = require("../../build/contracts/MarketplaceRegistry.json");          // Load artifact-file of MarketplaceRegistry
     } catch (e) {
       console.log(e);
     }
