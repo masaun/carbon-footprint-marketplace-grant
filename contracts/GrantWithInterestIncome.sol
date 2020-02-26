@@ -24,6 +24,8 @@ contract GrantWithInterestIncome is CfStorage, CfConstants {
     //rDAI public rDai;
     IRToken public rDai;
 
+    address rDaiProxy;
+
     constructor(
         address _UnderlyingToken,  // DAI
         address _AllocationToken,  // cDAI
@@ -33,6 +35,8 @@ contract GrantWithInterestIncome is CfStorage, CfConstants {
         cDai = IAllocationStrategy(_AllocationToken);  // cDAI
         //rDai = rDAI(_rDaiProxy, _AllocationToken);   // rDAI
         rDai = IRToken(_rDaiProxy);                    // rDAI
+
+        rDaiProxy = _rDaiProxy;
     }
 
 
@@ -61,6 +65,11 @@ contract GrantWithInterestIncome is CfStorage, CfConstants {
     /////////////////////////////////////////
     // rToken interface / Basic 3 functions
     /////////////////////////////////////////
+    function DaiApprove (address rDaiProxy, uint256 amount) public returns (bool) {
+        // approve(address spender, uint256 amount) <= [Ref]: IERC20.sol
+        Dai.approve(rDaiProxy, _amount);
+    }    
+
     function rDaiMint(uint256 _mintAmount) public returns (bool) {
         rDai.mint(_mintAmount);
         return CfConstants.CONFIRMED;
