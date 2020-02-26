@@ -32,21 +32,11 @@ export default class NewBancorPool extends Component {
 
 
   getTestData = async () => {
-    const { accounts, new_bancor_pool, web3 } = this.state;
+    const { accounts, grant_with_interest_income, web3 } = this.state;
 
-    const response_1 = await new_bancor_pool.methods.testFunc().send({ from: accounts[0] })
+    const response_1 = await grant_with_interest_income.methods.testFunc().send({ from: accounts[0] })
     console.log('=== response of testFunc() function ===', response_1);
   }
-
-
-  testFuncCallBancorNetworkContractAddr = async () => {
-    const { accounts, new_bancor_pool, web3 } = this.state;
-
-    const response_1 = await new_bancor_pool.methods.testFuncCallBancorNetworkContractAddr().call()
-    console.log('=== response of testFuncCallBancorNetworkContractAddr() function ===', response_1); 
-  }
-
-
 
 
 
@@ -114,7 +104,7 @@ export default class NewBancorPool extends Component {
 
         // Create instance of contracts
         if (GrantWithInterestIncome.networks) {
-          deployedNetwork = NewBancorPool.networks[networkId.toString()];
+          deployedNetwork = GrantWithInterestIncome.networks[networkId.toString()];
           if (deployedNetwork) {
             instanceGrantWithInterestIncome = new web3.eth.Contract(
               GrantWithInterestIncome.abi,

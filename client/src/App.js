@@ -5,8 +5,8 @@ import Footer from "./components/Footer/index.js";
 import Hero from "./components/Hero/index.js";
 import Web3Info from "./components/Web3Info/index.js";
 
-// NewBancorPool
-import NewBancorPool from "./components/NewBancorPool/index.js";
+// GrantWithInterestIncome
+import GrantWithInterestIncome from "./components/GrantWithInterestIncome/index.js";
 
 import { Typography, Grid, TextField } from '@material-ui/core';
 import { ThemeProvider } from '@material-ui/styles';
@@ -95,7 +95,7 @@ componentDidMount = async () => {
 
         // Create instance of contracts
         if (GrantWithInterestIncome.networks) {
-          deployedNetwork = NewBancorPool.networks[networkId.toString()];
+          deployedNetwork = GrantWithInterestIncome.networks[networkId.toString()];
           if (deployedNetwork) {
             instanceGrantWithInterestIncome = new web3.eth.Contract(
               GrantWithInterestIncome.abi,
@@ -159,9 +159,9 @@ componentDidMount = async () => {
     }
   }
 
-  refreshValues = (instanceNewBancorPool) => {
-    if (instanceNewBancorPool) {
-      console.log('refreshValues of instanceStreamingMoney');
+  refreshValues = (instanceGrantWithInterestIncome) => {
+    if (instanceGrantWithInterestIncome) {
+      console.log('refreshValues of instanceGrantWithInterestIncome');
     }
   }
 
@@ -197,10 +197,10 @@ componentDidMount = async () => {
     );
   }
 
-  renderNewBancorPool() {
+  renderGrantWithInterestIncome() {
     return (
       <div className={styles.wrapper}>
-        <NewBancorPool />
+        <GrantWithInterestIncome />
       </div>
     );
   }
@@ -210,7 +210,7 @@ componentDidMount = async () => {
       <div className={styles.App}>
         <Header />
           {this.state.route === '' && this.renderInstructions()}
-          {this.state.route === 'new_bancor_pool' && this.renderNewBancorPool()} 
+          {this.state.route === 'grant_with_interest_income' && this.renderGrantWithInterestIncome()} 
         <Footer />
       </div>
     );
