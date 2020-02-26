@@ -41,7 +41,6 @@ contract GrantWithInterestIncome is CfStorage, CfConstants {
     } 
 
 
-
     function createGrantWithInerestIncome(uint256 _mintAmount, address _redeemTo, uint256 _redeemTokens, address _owner) public returns (bool) {
         // #1 Mint rDAI
         rDaiMint(_mintAmount);

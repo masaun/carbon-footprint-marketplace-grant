@@ -81,9 +81,12 @@ export default class GrantWithInterestIncome extends Component {
   //////////////////////////////////// 
   ///// Refresh Values
   ////////////////////////////////////
-  refreshValues = (instanceGrantWithInterestIncome) => {
+  refreshValues = (instanceGrantWithInterestIncome, instanceMarketplaceRegistry) => {
     if (instanceGrantWithInterestIncome) {
       console.log('refreshValues of instanceGrantWithInterestIncome');
+    }
+    if (instanceMarketplaceRegistry) {
+      console.log('refreshValues of instanceMarketplaceRegistry');
     }
   }
 
@@ -154,7 +157,7 @@ export default class GrantWithInterestIncome extends Component {
         if (MarketplaceRegistry.networks) {
           deployedNetwork = MarketplaceRegistry.networks[networkId.toString()];
           if (deployedNetwork) {
-            instanceGrantWithInterestIncome = new web3.eth.Contract(
+            instanceMarketplaceRegistry = new web3.eth.Contract(
               MarketplaceRegistry.abi,
               deployedNetwork && deployedNetwork.address,
             );
@@ -232,7 +235,7 @@ export default class GrantWithInterestIncome extends Component {
 
               <Button size={'small'} mt={3} mb={2} onClick={this.rDaiRedeemAndTransfer_}> rDai Redeem And Transfer </Button> <br />
 
-              <Button size={'small'} mt={3} mb={2} onClick={this.rDaiPayInteresta_}> rDai Pay Interest </Button> <br />
+              <Button size={'small'} mt={3} mb={2} onClick={this.rDaiPayInterest_}> rDai Pay Interest </Button> <br />
 
             </Card>
           </Grid>
