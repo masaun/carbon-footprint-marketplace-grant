@@ -5,8 +5,8 @@ import Footer from "./components/Footer/index.js";
 import Hero from "./components/Hero/index.js";
 import Web3Info from "./components/Web3Info/index.js";
 
-// NewBancorPool
-import NewBancorPool from "./components/NewBancorPool/index.js";
+// GrantWithInterestIncome
+import GrantWithInterestIncome from "./components/GrantWithInterestIncome/index.js";
 
 import { Typography, Grid, TextField } from '@material-ui/core';
 import { ThemeProvider } from '@material-ui/styles';
@@ -55,12 +55,14 @@ class App extends Component {
     return [];
   }
 
-  componentDidMount = async () => {
+componentDidMount = async () => {
     const hotLoaderDisabled = zeppelinSolidityHotLoaderOptions.disabled;
  
-    let NewBancorPool = {};
+    let GrantWithInterestIncome = {};
+    let MarketplaceRegistry = {};
     try {
-      NewBancorPool = require("../../build/contracts/NewBancorPool.json");     // Load ABI of contract of NewBancorPool
+      GrantWithInterestIncome = require("../../build/contracts/GrantWithInterestIncome.json"); // Load ABI of contract of GrantWithInterestIncome
+      MarketplaceRegistry = require("../../build/contracts/MarketplaceRegistry.json");          // Load artifact-file of MarketplaceRegistry
     } catch (e) {
       console.log(e);
     }
@@ -87,22 +89,36 @@ class App extends Component {
         let balance = accounts.length > 0 ? await web3.eth.getBalance(accounts[0]): web3.utils.toWei('0');
         balance = web3.utils.fromWei(balance, 'ether');
 
-        let instanceNewBancorPool = null;
+        let instanceGrantWithInterestIncome = null;
+        let instanceMarketplaceRegistry = null;
         let deployedNetwork = null;
 
         // Create instance of contracts
-        if (NewBancorPool.networks) {
-          deployedNetwork = NewBancorPool.networks[networkId.toString()];
+        if (GrantWithInterestIncome.networks) {
+          deployedNetwork = GrantWithInterestIncome.networks[networkId.toString()];
           if (deployedNetwork) {
-            instanceNewBancorPool = new web3.eth.Contract(
-              NewBancorPool.abi,
+            instanceGrantWithInterestIncome = new web3.eth.Contract(
+              GrantWithInterestIncome.abi,
               deployedNetwork && deployedNetwork.address,
             );
-            console.log('=== instanceNewBancorPool ===', instanceNewBancorPool);
+            console.log('=== instanceGrantWithInterestIncome ===', instanceGrantWithInterestIncome);
           }
         }
 
-        if (NewBancorPool) {
+        if (MarketplaceRegistry.networks) {
+          deployedNetwork = MarketplaceRegistry.networks[networkId.toString()];
+          if (deployedNetwork) {
+            instanceGrantWithInterestIncome = new web3.eth.Contract(
+              MarketplaceRegistry.abi,
+              deployedNetwork && deployedNetwork.address,
+            );
+            console.log('=== instanceMarketplaceRegistry ===', instanceMarketplaceRegistry);
+          }
+        }
+
+        if (GrantWithInterestIncome || MarketplaceRegistry) {
+          // Set web3, accounts, and contract to the state, and then proceed with an
+          // example of interacting with the contract's methods.
           this.setState({ 
             web3, 
             ganacheAccounts, 
@@ -112,13 +128,15 @@ class App extends Component {
             networkType, 
             hotLoaderDisabled,
             isMetaMask, 
-            new_bancor_pool: instanceNewBancorPool
+            grant_with_interest_income: instanceGrantWithInterestIncome,
+            marketplace_registry: instanceMarketplaceRegistry
           }, () => {
             this.refreshValues(
-              instanceNewBancorPool
+              instanceGrantWithInterestIncome,
+              instanceMarketplaceRegistry
             );
             setInterval(() => {
-              this.refreshValues(instanceNewBancorPool);
+              this.refreshValues(instanceGrantWithInterestIncome, instanceMarketplaceRegistry);
             }, 5000);
           });
         }
@@ -133,7 +151,7 @@ class App extends Component {
       );
       console.error(error);
     }
-  };
+  }
 
   componentWillUnmount() {
     if (this.interval) {
@@ -141,9 +159,9 @@ class App extends Component {
     }
   }
 
-  refreshValues = (instanceNewBancorPool) => {
-    if (instanceNewBancorPool) {
-      console.log('refreshValues of instanceStreamingMoney');
+  refreshValues = (instanceGrantWithInterestIncome) => {
+    if (instanceGrantWithInterestIncome) {
+      console.log('refreshValues of instanceGrantWithInterestIncome');
     }
   }
 
@@ -179,10 +197,10 @@ class App extends Component {
     );
   }
 
-  renderNewBancorPool() {
+  renderGrantWithInterestIncome() {
     return (
       <div className={styles.wrapper}>
-        <NewBancorPool />
+        <GrantWithInterestIncome />
       </div>
     );
   }
@@ -192,7 +210,7 @@ class App extends Component {
       <div className={styles.App}>
         <Header />
           {this.state.route === '' && this.renderInstructions()}
-          {this.state.route === 'new_bancor_pool' && this.renderNewBancorPool()} 
+          {this.state.route === 'grant_with_interest_income' && this.renderGrantWithInterestIncome()} 
         <Footer />
       </div>
     );

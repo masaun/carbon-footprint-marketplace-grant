@@ -11,11 +11,9 @@ import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
 // cDAI
 import "./rtoken-contracts/contracts/IAllocationStrategy.sol";
-//import "./rtoken-contracts/contracts/CompoundAllocationStrategy.sol";
 
 // rDAI
 import "./rtoken-contracts/contracts/tokens/rDAI.sol";
-//import "./rtoken-contracts/contracts/IRToken.sol";
 
 
 contract GrantWithInterestIncome is CfStorage, CfConstants {
@@ -29,11 +27,16 @@ contract GrantWithInterestIncome is CfStorage, CfConstants {
         address _AllocationToken,  // cDAI
         address _rDaiProxy         // rDAI
     ) public {
-        //rToken = IRToken(_rToken);  // [Ref]: ./rtoken-contracts/contracts/RToken.sol
         Dai = IERC20(_UnderlyingToken);                // DAI
         cDai = IAllocationStrategy(_AllocationToken);  // cDAI
         rDai = rDAI(_rDaiProxy);                       // rDAI
     }
+
+
+    function testFunc() public returns (bool) {
+        return CfConstants.CONFIRMED;
+    } 
+
 
 
     function createGrantWithInerestIncome(uint256 _mintAmount, address _redeemTo, uint256 _redeemTokens, address _owner) public returns (bool) {
@@ -58,26 +61,22 @@ contract GrantWithInterestIncome is CfStorage, CfConstants {
     /////////////////////////////////////////
     function rDaiMint(uint256 _mintAmount) public returns (bool) {
         rDai.mint(_mintAmount);
-        //rToken.mint(_mintAmount);
         return CfConstants.CONFIRMED;
     }
 
     function rDaiRedeem(uint256 _redeemTokens) public returns (bool) {
         rDai.redeem(_redeemTokens);
-        //rToken.redeem(_redeemTokens);
         return CfConstants.CONFIRMED;
     }
 
     function rDaiRedeemAndTransfer(address _redeemTo, uint256 _redeemTokens) public returns (bool) {
         rDai.redeemAndTransfer(_redeemTo, _redeemTokens);
-        //rToken.redeemAndTransfer(_redeemTo, _redeemTokens);
         return CfConstants.CONFIRMED;
     }
     
 
     function rDaiPayInterest(address _owner) public returns (bool) {
         rDai.payInterest(_owner);
-        //rToken.payInterest(_owner);
         return CfConstants.CONFIRMED;
     }
 
@@ -93,7 +92,6 @@ contract GrantWithInterestIncome is CfStorage, CfConstants {
      */
     function rDaiName() public view returns (string memory) {
         return rDai.name();
-        //return rToken.name();
     }
 
 
@@ -103,13 +101,11 @@ contract GrantWithInterestIncome is CfStorage, CfConstants {
         bool doChangeHat
     ) public returns (uint256 hatID) {
         return rDai.createHat(recipients, proportions, doChangeHat);
-        //return rToken.createHat(recipients, proportions, doChangeHat);
     }
 
 
     function rDaiUnderlying() public returns (bool) {
         cDai.underlying();
-        //compoundAllocationStrategy.underlying();
     }
     
 

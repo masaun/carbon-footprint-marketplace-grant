@@ -15,7 +15,7 @@ import styles from '../../App.module.scss';
 
 
 
-export default class NewBancorPool extends Component {
+export default class GrantWithInterestIncome extends Component {
   constructor(props) {    
     super(props);
 
@@ -32,21 +32,11 @@ export default class NewBancorPool extends Component {
 
 
   getTestData = async () => {
-    const { accounts, new_bancor_pool, web3 } = this.state;
+    const { accounts, grant_with_interest_income, web3 } = this.state;
 
-    const response_1 = await new_bancor_pool.methods.testFunc().send({ from: accounts[0] })
+    const response_1 = await grant_with_interest_income.methods.testFunc().send({ from: accounts[0] })
     console.log('=== response of testFunc() function ===', response_1);
   }
-
-
-  testFuncCallBancorNetworkContractAddr = async () => {
-    const { accounts, new_bancor_pool, web3 } = this.state;
-
-    const response_1 = await new_bancor_pool.methods.testFuncCallBancorNetworkContractAddr().call()
-    console.log('=== response of testFuncCallBancorNetworkContractAddr() function ===', response_1); 
-  }
-
-
 
 
 
@@ -54,9 +44,9 @@ export default class NewBancorPool extends Component {
   //////////////////////////////////// 
   ///// Refresh Values
   ////////////////////////////////////
-  refreshValues = (instanceNewBancorPool) => {
-    if (instanceNewBancorPool) {
-      console.log('refreshValues of instanceNewBancorPool');
+  refreshValues = (instanceGrantWithInterestIncome) => {
+    if (instanceGrantWithInterestIncome) {
+      console.log('refreshValues of instanceGrantWithInterestIncome');
     }
   }
 
@@ -80,8 +70,8 @@ export default class NewBancorPool extends Component {
     let GrantWithInterestIncome = {};
     let MarketplaceRegistry = {};
     try {
-      GrantWithInterestIncome = require("../../../../build/contracts/GrantWithInterestIncome.json"); // Load ABI of contract of NewBancorPool
-      MarketplaceRegistry = require("../../../../build/contracts/MarketplaceRegistry.sol"); // Load artifact-file of MarketplaceRegistry
+      GrantWithInterestIncome = require("../../../../build/contracts/GrantWithInterestIncome.json"); // Load ABI of contract of GrantWithInterestIncome
+      MarketplaceRegistry = require("../../../../build/contracts/MarketplaceRegistry.json");          // Load artifact-file of MarketplaceRegistry
     } catch (e) {
       console.log(e);
     }
@@ -108,22 +98,34 @@ export default class NewBancorPool extends Component {
         let balance = accounts.length > 0 ? await web3.eth.getBalance(accounts[0]): web3.utils.toWei('0');
         balance = web3.utils.fromWei(balance, 'ether');
 
-        let instanceNewBancorPool = null;
+        let instanceGrantWithInterestIncome = null;
+        let instanceMarketplaceRegistry = null;
         let deployedNetwork = null;
 
         // Create instance of contracts
-        if (NewBancorPool.networks) {
-          deployedNetwork = NewBancorPool.networks[networkId.toString()];
+        if (GrantWithInterestIncome.networks) {
+          deployedNetwork = GrantWithInterestIncome.networks[networkId.toString()];
           if (deployedNetwork) {
-            instanceNewBancorPool = new web3.eth.Contract(
-              NewBancorPool.abi,
+            instanceGrantWithInterestIncome = new web3.eth.Contract(
+              GrantWithInterestIncome.abi,
               deployedNetwork && deployedNetwork.address,
             );
-            console.log('=== instanceNewBancorPool ===', instanceNewBancorPool);
+            console.log('=== instanceGrantWithInterestIncome ===', instanceGrantWithInterestIncome);
           }
         }
 
-        if (NewBancorPool) {
+        if (MarketplaceRegistry.networks) {
+          deployedNetwork = MarketplaceRegistry.networks[networkId.toString()];
+          if (deployedNetwork) {
+            instanceGrantWithInterestIncome = new web3.eth.Contract(
+              MarketplaceRegistry.abi,
+              deployedNetwork && deployedNetwork.address,
+            );
+            console.log('=== instanceMarketplaceRegistry ===', instanceMarketplaceRegistry);
+          }
+        }
+
+        if (GrantWithInterestIncome || MarketplaceRegistry) {
           // Set web3, accounts, and contract to the state, and then proceed with an
           // example of interacting with the contract's methods.
           this.setState({ 
@@ -135,14 +137,15 @@ export default class NewBancorPool extends Component {
             networkType, 
             hotLoaderDisabled,
             isMetaMask, 
-            new_bancor_pool: instanceNewBancorPool,
-            CompoundRopsten: CompoundRopsten  // Did artifact.require() about /compound/networks/ropsten.json
+            grant_with_interest_income: instanceGrantWithInterestIncome,
+            marketplace_registry: instanceMarketplaceRegistry
           }, () => {
             this.refreshValues(
-              instanceNewBancorPool
+              instanceGrantWithInterestIncome,
+              instanceMarketplaceRegistry
             );
             setInterval(() => {
-              this.refreshValues(instanceNewBancorPool);
+              this.refreshValues(instanceGrantWithInterestIncome, instanceMarketplaceRegistry);
             }, 5000);
           });
         }
@@ -176,8 +179,7 @@ export default class NewBancorPool extends Component {
                   p={20} 
                   borderColor={"#E8E8E8"}
             >
-              <h4>Bancor Liquidly Pool with Compound</h4>
-              <h5>（Try to integrate Compound with Bancor Pool）</h5>
+              <h4>Grant With Interest Income</h4>
 
               <Image
                 alt="random unsplash image"
@@ -189,15 +191,6 @@ export default class NewBancorPool extends Component {
 
               <Button size={'small'} mt={3} mb={2} onClick={this.getTestData}> Get TestData </Button> <br />
 
-              <Button size={'small'} mt={3} mb={2} onClick={this.testFuncCallBancorNetworkContractAddr}> testFuncCallBancorNetworkContractAddr </Button> <br />
-
-              <Button size={'small'} mt={3} mb={2} onClick={this._mintCToken}> Mint CToken </Button> <br />
-
-              <hr />
-
-              <p>i.e). If it execute a button below, it is published a SmartToken of "cDAIBNT"</p>
-
-              <Button size={'small'} mt={3} mb={2} onClick={this._bancorPoolWithCompound}> Bancor Pool With Compound（cToken） </Button> <br />
             </Card>
           </Grid>
 
