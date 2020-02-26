@@ -13,14 +13,16 @@ import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "./rtoken-contracts/contracts/IAllocationStrategy.sol";
 
 // rDAI
-import "./rtoken-contracts/contracts/tokens/rDAI.sol";
+//import "./rtoken-contracts/contracts/tokens/rDAI.sol";
+import "./rtoken-contracts/contracts/IRToken.sol";
 
 
 contract GrantWithInterestIncome is CfStorage, CfConstants {
 
     IERC20 public Dai;
     IAllocationStrategy public cDai;
-    rDAI public rDai;
+    //rDAI public rDai;
+    IRToken public rDai;
 
     constructor(
         address _UnderlyingToken,  // DAI
@@ -29,7 +31,8 @@ contract GrantWithInterestIncome is CfStorage, CfConstants {
     ) public {
         Dai = IERC20(_UnderlyingToken);                // DAI
         cDai = IAllocationStrategy(_AllocationToken);  // cDAI
-        rDai = rDAI(_rDaiProxy);                       // rDAI
+        //rDai = rDAI(_rDaiProxy, _AllocationToken);   // rDAI
+        rDai = IRToken(_rDaiProxy);                    // rDAI
     }
 
 

@@ -27,7 +27,7 @@ export default class GrantWithInterestIncome extends Component {
       route: window.location.pathname.replace("/", "")
     };
 
-    this.getTestData_ = this.getTestData.bind(this);
+    this.getTestData = this.getTestData.bind(this);
     this.rDaiMint_ = this.rDaiMint_.bind(this);
     this.rDaiRedeemAndTransfer_ = this.rDaiRedeemAndTransfer_.bind(this);
     this.rDaiPayInterest_ = this.rDaiPayInterest_.bind(this);
@@ -45,7 +45,7 @@ export default class GrantWithInterestIncome extends Component {
       const { accounts, grant_with_interest_income, web3 } = this.state;
       const _mintAmount = 100
 
-      let response = grant_with_interest_income.methods.rDaiMint(_mintAmount).send({ from: accounts[0] })
+      let response = await grant_with_interest_income.methods.rDaiMint(_mintAmount).send({ from: accounts[0] })
       console.log('=== response of rDaiMint() function ===', response);
   }
 
@@ -53,7 +53,7 @@ export default class GrantWithInterestIncome extends Component {
       const { accounts, grant_with_interest_income, web3 } = this.state;
       const _redeemTokens = 10
 
-      let response = grant_with_interest_income.methods.rDaiRedeem(_redeemTokens).send({ from: accounts[0] })
+      let response = await grant_with_interest_income.methods.rDaiRedeem(_redeemTokens).send({ from: accounts[0] })
       console.log('=== response of rDaiRedeem() function ===', response);
   }
 
@@ -62,7 +62,7 @@ export default class GrantWithInterestIncome extends Component {
       const _redeemTo = '0x8Fc9d07b1B9542A71C4ba1702Cd230E160af6EB3'
       const _redeemTokens = 10
 
-      let response = grant_with_interest_income.methods.rDaiRedeemAndTransfer(_redeemTo, _redeemTokens).send({ from: accounts[0] })
+      let response = await grant_with_interest_income.methods.rDaiRedeemAndTransfer(_redeemTo, _redeemTokens).send({ from: accounts[0] })
       console.log('=== response of rDaiRedeemAndTransfer() function ===', response);
   }
   
@@ -70,7 +70,7 @@ export default class GrantWithInterestIncome extends Component {
       const { accounts, grant_with_interest_income, web3 } = this.state;
       const _owner = accounts[0]
 
-      let response = grant_with_interest_income.methods.rDaiPayInterest(_owner).send({ from: accounts[0] })
+      let response = await grant_with_interest_income.methods.rDaiPayInterest(_owner).send({ from: accounts[0] })
       console.log('=== response of rDaiPayInterest() function ===', response);
   }
 
