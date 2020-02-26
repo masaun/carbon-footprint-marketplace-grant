@@ -11,8 +11,10 @@
     "start-blank": "rm -rf client/src && cp -rf barebones/src client/",
     "client": "cd client && npm run start",
     "console": "truffle console --network development",
+    "compile:kovan": "truffle compile --reset --network kovan",
     "compile:ropsten": "truffle compile --reset --network ropsten",
     "migrate": "truffle migrate --reset --network development",
+    "migrate:kovan": "truffle migrate --reset --network kovan",
     "migrate:ropsten": "truffle migrate --reset --network ropsten"
   },
   "author": "masaun",
