@@ -28,6 +28,7 @@ export default class GrantWithInterestIncome extends Component {
     };
 
     this.getTestData = this.getTestData.bind(this);
+    this.DaiApprove = this.DaiApprove.bind(this);
     this.rDaiMint_ = this.rDaiMint_.bind(this);
     this.rDaiRedeemAndTransfer_ = this.rDaiRedeemAndTransfer_.bind(this);
     this.rDaiPayInterest_ = this.rDaiPayInterest_.bind(this);
@@ -40,6 +41,14 @@ export default class GrantWithInterestIncome extends Component {
       let response_1 = await grant_with_interest_income.methods.testFunc().send({ from: accounts[0] })
       console.log('=== response of testFunc() function ===', response_1);
   }
+
+  DaiApprove_ = async () => {
+      const { accounts, grant_with_interest_income, web3 } = this.state;
+      const _amount = 100
+
+      let response = await grant_with_interest_income.methods.DaiApprove(_amount).send({ from: accounts[0] })
+      console.log('=== response of DaiApprove() function ===', response);  
+  } 
 
   rDaiMint_ = async () => {
       const { accounts, grant_with_interest_income, web3 } = this.state;
@@ -73,6 +82,7 @@ export default class GrantWithInterestIncome extends Component {
       let response = await grant_with_interest_income.methods.rDaiPayInterest(_owner).send({ from: accounts[0] })
       console.log('=== response of rDaiPayInterest() function ===', response);
   }
+
 
 
 
@@ -230,6 +240,8 @@ export default class GrantWithInterestIncome extends Component {
               />
 
               <Button size={'small'} mt={3} mb={2} onClick={this.getTestData}> Get TestData </Button> <br />
+
+              <Button size={'small'} mt={3} mb={2} onClick={this.DaiApprove_}> Dai Approve </Button> <br />
 
               <Button size={'small'} mt={3} mb={2} onClick={this.rDaiMint_}> rDai Mint </Button> <br />
 
