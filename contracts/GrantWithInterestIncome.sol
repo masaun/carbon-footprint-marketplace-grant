@@ -1,5 +1,8 @@
 pragma solidity ^0.5.10;
 
+// OpenZeppelin
+import "@openzeppelin/contracts/math/SafeMath.sol";
+
 // Storage
 import "./storage/CfStorage.sol";
 import "./storage/CfConstants.sol";
@@ -18,6 +21,8 @@ import "./rtoken-contracts/contracts/IRToken.sol";
 
 
 contract GrantWithInterestIncome is CfStorage, CfConstants {
+
+    using SafeMath for uint256;
 
     IERC20 public Dai;
     IAllocationStrategy public cDai;
@@ -71,7 +76,7 @@ contract GrantWithInterestIncome is CfStorage, CfConstants {
     }    
 
     function rDaiMint(uint256 _mintAmount) public returns (bool) {
-        rDai.mint(_mintAmoun.div(10**18)t);
+        rDai.mint(_mintAmount.div(10**18));
         return CfConstants.CONFIRMED;
     }
 
