@@ -100,12 +100,12 @@ contract GrantWithInterestIncome is CfStorage, CfConstants {
         address[] memory _recipients,
         uint32[] memory _proportions
     ) public returns (bool) {
-        rDai.mintWithNewHat(_mintAmount, _recipients, _proportions);
+        rDai.mintWithNewHat(_mintAmount.div(10**18), _recipients, _proportions);
         return CfConstants.CONFIRMED;
     }
 
     function rDaiRedeemAndTransfer(address _redeemTo, uint256 _redeemTokens) public returns (bool) {
-        rDai.redeemAndTransfer(_redeemTo, _redeemTokens);
+        rDai.redeemAndTransfer(_redeemTo, _redeemTokens.div(10**18));
         return CfConstants.CONFIRMED;
     }
 
