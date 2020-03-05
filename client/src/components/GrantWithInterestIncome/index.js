@@ -28,7 +28,7 @@ export default class GrantWithInterestIncome extends Component {
     };
 
     this.getTestData = this.getTestData.bind(this);
-    this.DaiApprove = this.DaiApprove.bind(this);
+    this.DaiApprove_ = this.DaiApprove_.bind(this);
     this.rDaiMint_ = this.rDaiMint_.bind(this);
     this.rDaiRedeemAndTransfer_ = this.rDaiRedeemAndTransfer_.bind(this);
     this.rDaiPayInterest_ = this.rDaiPayInterest_.bind(this);
@@ -36,9 +36,9 @@ export default class GrantWithInterestIncome extends Component {
 
 
   getTestData = async () => {
-      const { accounts, grant_with_interest_income, web3 } = this.state;
+      const { accounts, marketplace_registry, web3 } = this.state;
 
-      let response_1 = await grant_with_interest_income.methods.testFunc().send({ from: accounts[0] })
+      let response_1 = await marketplace_registry.methods.testFunc().send({ from: accounts[0] })
       console.log('=== response of testFunc() function ===', response_1);
   }
 
@@ -52,7 +52,7 @@ export default class GrantWithInterestIncome extends Component {
 
   rDaiMint_ = async () => {
       const { accounts, grant_with_interest_income, web3 } = this.state;
-      const _mintAmount = 100
+      const _mintAmount = 10
 
       let response = await grant_with_interest_income.methods.rDaiMint(_mintAmount).send({ from: accounts[0] })
       console.log('=== response of rDaiMint() function ===', response);
@@ -155,6 +155,7 @@ export default class GrantWithInterestIncome extends Component {
         // Create instance of contracts
         if (GrantWithInterestIncome.networks) {
           deployedNetwork = GrantWithInterestIncome.networks[networkId.toString()];
+          console.log('=== deployedNetwork ===', deployedNetwork);
           if (deployedNetwork) {
             instanceGrantWithInterestIncome = new web3.eth.Contract(
               GrantWithInterestIncome.abi,
@@ -195,7 +196,7 @@ export default class GrantWithInterestIncome extends Component {
               instanceMarketplaceRegistry
             );
             setInterval(() => {
-              this.refreshValues(instanceGrantWithInterestIncome, instanceMarketplaceRegistry);
+              this.refreshValues(instanceMarketplaceRegistry, instanceMarketplaceRegistry);
             }, 5000);
           });
         }

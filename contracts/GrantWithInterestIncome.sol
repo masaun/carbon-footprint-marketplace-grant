@@ -65,18 +65,18 @@ contract GrantWithInterestIncome is CfStorage, CfConstants {
     /////////////////////////////////////////
     // rToken interface / Basic 3 functions
     /////////////////////////////////////////
-    function DaiApprove (uint256 amount) public returns (bool) {
+    function DaiApprove(uint256 amount) public returns (bool) {
         // approve(address spender, uint256 amount) <= [Ref]: IERC20.sol
-        Dai.approve(rDaiProxy, amount);
+        Dai.approve(rDaiProxy, amount.div(10**18));
     }    
 
     function rDaiMint(uint256 _mintAmount) public returns (bool) {
-        rDai.mint(_mintAmount);
+        rDai.mint(_mintAmoun.div(10**18)t);
         return CfConstants.CONFIRMED;
     }
 
     function rDaiRedeem(uint256 _redeemTokens) public returns (bool) {
-        rDai.redeem(_redeemTokens);
+        rDai.redeem(_redeemTokens.div(10**18));
         return CfConstants.CONFIRMED;
     }
 
