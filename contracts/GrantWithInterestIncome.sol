@@ -1,5 +1,8 @@
 pragma solidity ^0.5.10;
 
+// OpenZeppelin
+import "@openzeppelin/contracts/math/SafeMath.sol";
+
 // Storage
 import "./storage/CfStorage.sol";
 import "./storage/CfConstants.sol";
@@ -13,14 +16,20 @@ import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "./rtoken-contracts/contracts/IAllocationStrategy.sol";
 
 // rDAI
-import "./rtoken-contracts/contracts/tokens/rDAI.sol";
+//import "./rtoken-contracts/contracts/tokens/rDAI.sol";
+import "./rtoken-contracts/contracts/IRToken.sol";
 
 
 contract GrantWithInterestIncome is CfStorage, CfConstants {
 
+    using SafeMath for uint256;
+
     IERC20 public Dai;
     IAllocationStrategy public cDai;
-    rDAI public rDai;
+    //rDAI public rDai;
+    IRToken public rDai;
+
+    address rDaiProxy;
 
     constructor(
         address _UnderlyingToken,  // DAI
@@ -29,14 +38,16 @@ contract GrantWithInterestIncome is CfStorage, CfConstants {
     ) public {
         Dai = IERC20(_UnderlyingToken);                // DAI
         cDai = IAllocationStrategy(_AllocationToken);  // cDAI
-        rDai = rDAI(_rDaiProxy);                       // rDAI
+        //rDai = rDAI(_rDaiProxy, _AllocationToken);   // rDAI
+        rDai = IRToken(_rDaiProxy);                    // rDAI
+
+        rDaiProxy = _rDaiProxy;
     }
 
 
     function testFunc() public returns (bool) {
         return CfConstants.CONFIRMED;
     } 
-
 
 
     function createGrantWithInerestIncome(uint256 _mintAmount, address _redeemTo, uint256 _redeemTokens, address _owner) public returns (bool) {
@@ -59,27 +70,44 @@ contract GrantWithInterestIncome is CfStorage, CfConstants {
     /////////////////////////////////////////
     // rToken interface / Basic 3 functions
     /////////////////////////////////////////
+    function DaiApprove(uint256 amount) public returns (bool) {
+        // approve(address spender, uint256 amount) <= [Ref]: IERC20.sol
+        Dai.approve(rDaiProxy, amount.div(10**18));
+    }    
+
     function rDaiMint(uint256 _mintAmount) public returns (bool) {
-        rDai.mint(_mintAmount);
+        rDai.mint(_mintAmount.div(10**18));
         return CfConstants.CONFIRMED;
     }
 
     function rDaiRedeem(uint256 _redeemTokens) public returns (bool) {
-        rDai.redeem(_redeemTokens);
+        rDai.redeem(_redeemTokens.div(10**18));
         return CfConstants.CONFIRMED;
     }
-
-    function rDaiRedeemAndTransfer(address _redeemTo, uint256 _redeemTokens) public returns (bool) {
-        rDai.redeemAndTransfer(_redeemTo, _redeemTokens);
-        return CfConstants.CONFIRMED;
-    }
-    
 
     function rDaiPayInterest(address _owner) public returns (bool) {
         rDai.payInterest(_owner);
         return CfConstants.CONFIRMED;
     }
 
+
+    /////////////////////////////////////////
+    // rToken interface / Combination 3 functions
+    /////////////////////////////////////////
+
+    function rDaiMintWithNewHat(
+        uint256 _mintAmount,
+        address[] memory _recipients,
+        uint32[] memory _proportions
+    ) public returns (bool) {
+        rDai.mintWithNewHat(_mintAmount.div(10**18), _recipients, _proportions);
+        return CfConstants.CONFIRMED;
+    }
+
+    function rDaiRedeemAndTransfer(address _redeemTo, uint256 _redeemTokens) public returns (bool) {
+        rDai.redeemAndTransfer(_redeemTo, _redeemTokens.div(10**18));
+        return CfConstants.CONFIRMED;
+    }
 
 
 

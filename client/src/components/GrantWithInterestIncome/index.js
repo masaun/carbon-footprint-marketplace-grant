@@ -28,15 +28,62 @@ export default class GrantWithInterestIncome extends Component {
     };
 
     this.getTestData = this.getTestData.bind(this);
+    this.DaiApprove_ = this.DaiApprove_.bind(this);
+    this.rDaiMint_ = this.rDaiMint_.bind(this);
+    this.rDaiRedeemAndTransfer_ = this.rDaiRedeemAndTransfer_.bind(this);
+    this.rDaiPayInterest_ = this.rDaiPayInterest_.bind(this);
   }
 
 
   getTestData = async () => {
-    const { accounts, grant_with_interest_income, web3 } = this.state;
+      const { accounts, marketplace_registry, web3 } = this.state;
 
-    const response_1 = await grant_with_interest_income.methods.testFunc().send({ from: accounts[0] })
-    console.log('=== response of testFunc() function ===', response_1);
+      let response_1 = await marketplace_registry.methods.testFunc().send({ from: accounts[0] })
+      console.log('=== response of testFunc() function ===', response_1);
   }
+
+  DaiApprove_ = async () => {
+      const { accounts, grant_with_interest_income, web3 } = this.state;
+      const _amount = 100
+
+      let response = await grant_with_interest_income.methods.DaiApprove(_amount).send({ from: accounts[0] })
+      console.log('=== response of DaiApprove() function ===', response);  
+  } 
+
+  rDaiMint_ = async () => {
+      const { accounts, grant_with_interest_income, web3 } = this.state;
+      const _mintAmount = 10
+
+      let response = await grant_with_interest_income.methods.rDaiMint(_mintAmount).send({ from: accounts[0] })
+      console.log('=== response of rDaiMint() function ===', response);
+  }
+
+  rDaiRedeem_ = async () => {
+      const { accounts, grant_with_interest_income, web3 } = this.state;
+      const _redeemTokens = 10
+
+      let response = await grant_with_interest_income.methods.rDaiRedeem(_redeemTokens).send({ from: accounts[0] })
+      console.log('=== response of rDaiRedeem() function ===', response);
+  }
+
+  rDaiRedeemAndTransfer_ = async () => {
+      const { accounts, grant_with_interest_income, web3 } = this.state;
+      const _redeemTo = '0x8Fc9d07b1B9542A71C4ba1702Cd230E160af6EB3'
+      const _redeemTokens = 10
+
+      let response = await grant_with_interest_income.methods.rDaiRedeemAndTransfer(_redeemTo, _redeemTokens).send({ from: accounts[0] })
+      console.log('=== response of rDaiRedeemAndTransfer() function ===', response);
+  }
+  
+  rDaiPayInterest_ = async () => {
+      const { accounts, grant_with_interest_income, web3 } = this.state;
+      const _owner = accounts[0]
+
+      let response = await grant_with_interest_income.methods.rDaiPayInterest(_owner).send({ from: accounts[0] })
+      console.log('=== response of rDaiPayInterest() function ===', response);
+  }
+
+
 
 
 
@@ -44,9 +91,12 @@ export default class GrantWithInterestIncome extends Component {
   //////////////////////////////////// 
   ///// Refresh Values
   ////////////////////////////////////
-  refreshValues = (instanceGrantWithInterestIncome) => {
+  refreshValues = (instanceGrantWithInterestIncome, instanceMarketplaceRegistry) => {
     if (instanceGrantWithInterestIncome) {
       console.log('refreshValues of instanceGrantWithInterestIncome');
+    }
+    if (instanceMarketplaceRegistry) {
+      console.log('refreshValues of instanceMarketplaceRegistry');
     }
   }
 
@@ -105,6 +155,7 @@ export default class GrantWithInterestIncome extends Component {
         // Create instance of contracts
         if (GrantWithInterestIncome.networks) {
           deployedNetwork = GrantWithInterestIncome.networks[networkId.toString()];
+          console.log('=== deployedNetwork ===', deployedNetwork);
           if (deployedNetwork) {
             instanceGrantWithInterestIncome = new web3.eth.Contract(
               GrantWithInterestIncome.abi,
@@ -117,7 +168,7 @@ export default class GrantWithInterestIncome extends Component {
         if (MarketplaceRegistry.networks) {
           deployedNetwork = MarketplaceRegistry.networks[networkId.toString()];
           if (deployedNetwork) {
-            instanceGrantWithInterestIncome = new web3.eth.Contract(
+            instanceMarketplaceRegistry = new web3.eth.Contract(
               MarketplaceRegistry.abi,
               deployedNetwork && deployedNetwork.address,
             );
@@ -145,7 +196,7 @@ export default class GrantWithInterestIncome extends Component {
               instanceMarketplaceRegistry
             );
             setInterval(() => {
-              this.refreshValues(instanceGrantWithInterestIncome, instanceMarketplaceRegistry);
+              this.refreshValues(instanceMarketplaceRegistry, instanceMarketplaceRegistry);
             }, 5000);
           });
         }
@@ -190,6 +241,14 @@ export default class GrantWithInterestIncome extends Component {
               />
 
               <Button size={'small'} mt={3} mb={2} onClick={this.getTestData}> Get TestData </Button> <br />
+
+              <Button size={'small'} mt={3} mb={2} onClick={this.DaiApprove_}> Dai Approve </Button> <br />
+
+              <Button size={'small'} mt={3} mb={2} onClick={this.rDaiMint_}> rDai Mint </Button> <br />
+
+              <Button size={'small'} mt={3} mb={2} onClick={this.rDaiRedeemAndTransfer_}> rDai Redeem And Transfer </Button> <br />
+
+              <Button size={'small'} mt={3} mb={2} onClick={this.rDaiPayInterest_}> rDai Pay Interest </Button> <br />
 
             </Card>
           </Grid>

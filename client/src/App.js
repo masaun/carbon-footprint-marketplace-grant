@@ -37,9 +37,17 @@ class App extends Component {
   ///////--------------------- Functions of testFunc ---------------------------  
 
 
-
-
-
+  //////////////////////////////////// 
+  ///// Refresh Values
+  ////////////////////////////////////
+  refreshValues = (instanceGrantWithInterestIncome, instanceMarketplaceRegistry) => {
+    if (instanceGrantWithInterestIncome) {
+      console.log('refreshValues of instanceGrantWithInterestIncome');
+    }
+    if (instanceMarketplaceRegistry) {
+      console.log('refreshValues of instanceMarketplaceRegistry');
+    }
+  }
 
 
   //////////////////////////////////// 
@@ -55,7 +63,7 @@ class App extends Component {
     return [];
   }
 
-componentDidMount = async () => {
+  componentDidMount = async () => {
     const hotLoaderDisabled = zeppelinSolidityHotLoaderOptions.disabled;
  
     let GrantWithInterestIncome = {};
@@ -108,7 +116,7 @@ componentDidMount = async () => {
         if (MarketplaceRegistry.networks) {
           deployedNetwork = MarketplaceRegistry.networks[networkId.toString()];
           if (deployedNetwork) {
-            instanceGrantWithInterestIncome = new web3.eth.Contract(
+            instanceMarketplaceRegistry = new web3.eth.Contract(
               MarketplaceRegistry.abi,
               deployedNetwork && deployedNetwork.address,
             );
