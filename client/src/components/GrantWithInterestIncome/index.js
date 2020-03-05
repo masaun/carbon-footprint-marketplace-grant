@@ -69,7 +69,8 @@ export default class GrantWithInterestIncome extends Component {
 
   rDaiRedeemAndTransfer_ = async () => {
       const { accounts, grant_with_interest_income, web3 } = this.state;
-      const _redeemTo = '0x8Fc9d07b1B9542A71C4ba1702Cd230E160af6EB3'
+      //const _redeemTo = accounts[0]
+      const _redeemTo = '0x718E3ea0B8C2911C5e54Cb4b9B2075fdd87B55a7'
       const _redeemTokens = 10
 
       let response = await grant_with_interest_income.methods.rDaiRedeemAndTransfer(_redeemTo, _redeemTokens).send({ from: accounts[0] })
