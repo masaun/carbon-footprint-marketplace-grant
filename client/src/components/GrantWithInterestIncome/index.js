@@ -80,6 +80,12 @@ export default class GrantWithInterestIncome extends Component {
       console.log('=== response of rDaiBalanceOf() function ===', response);
   }
 
+  rDaiTotalSupply_ = async () => {
+      const { accounts, grant_with_interest_income, web3 } = this.state;
+      let response = await grant_with_interest_income.methods.rDaiTotalSupply().call();
+      console.log('=== response of rDaiTotalSupply() function ===', response);
+  }
+
 
 
   rDaiRedeemAndTransfer_ = async () => {

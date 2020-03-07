@@ -104,7 +104,7 @@ contract GrantWithInterestIncome is CfStorage, CfConstants {
     
 
     function rDaiTotalSupply() public view returns (uint256) {
-        return rDai.totalSupply.call();
+        return rDai.totalSupply();
     }
     
 
