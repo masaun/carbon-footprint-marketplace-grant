@@ -35,6 +35,7 @@ export default class GrantWithInterestIncome extends Component {
     this.rDaiPayInterest_ = this.rDaiPayInterest_.bind(this);
 
     this.rDaiBalanceOf_ = this.rDaiBalanceOf_.bind(this);
+    this.rDaiTotalSupply_ = this.rDaiTotalSupply_.bind(this);
   }
 
 
@@ -283,6 +284,8 @@ export default class GrantWithInterestIncome extends Component {
               <hr />
 
               <Button size={'small'} mt={3} mb={2} onClick={this.rDaiBalanceOf_}> rDai BalanceOf </Button> <br />
+
+              <Button size={'small'} mt={3} mb={2} onClick={this.rDaiTotalSupply_}> rDai TotalSupply </Button> <br />
             </Card>
           </Grid>
 
