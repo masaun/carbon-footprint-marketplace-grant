@@ -62,6 +62,15 @@ export default class GrantWithInterestIncome extends Component {
       console.log('=== response of rDaiMint() function ===', response);
   }
 
+  rDaiTransfer_ = async () => {
+      const { accounts, grant_with_interest_income, web3 } = this.state;
+      const _dst = accounts[0]
+      const _amount = 10000000000
+
+      let response = await grant_with_interest_income.methods.rDaiTransfer(_dst, _amount).send({ from: accounts[0] })
+      console.log('=== response of rDaiTransfer() function ===', response);
+  }
+
   rDaiRedeem_ = async () => {
       const { accounts, grant_with_interest_income, web3 } = this.state;
       const _redeemTokens = 10000000000
