@@ -31,6 +31,8 @@ export default class GrantWithInterestIncome extends Component {
     this.DaiApprove_ = this.DaiApprove_.bind(this);
     this.rDaiMint_ = this.rDaiMint_.bind(this);
     this.rDaiRedeem_ = this.rDaiRedeem_.bind(this);
+    this.rDaiTransfer_ = this.rDaiTransfer_.bind(this);
+
     this.rDaiRedeemAndTransfer_ = this.rDaiRedeemAndTransfer_.bind(this);
     this.rDaiPayInterest_ = this.rDaiPayInterest_.bind(this);
 
@@ -285,6 +287,10 @@ export default class GrantWithInterestIncome extends Component {
               <Button size={'small'} mt={3} mb={2} onClick={this.rDaiMint_}> rDai Mint </Button> <br />
 
               <Button size={'small'} mt={3} mb={2} onClick={this.rDaiRedeem_}> rDai Redeem </Button> <br />
+
+              <Button size={'small'} mt={3} mb={2} onClick={this.rDaiTransfer_}> rDai Transfer </Button> <br />
+
+              <hr />
 
               <Button size={'small'} mt={3} mb={2} onClick={this.rDaiRedeemAndTransfer_}> rDai Redeem And Transfer </Button> <br />
 
