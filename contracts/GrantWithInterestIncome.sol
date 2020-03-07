@@ -83,7 +83,6 @@ contract GrantWithInterestIncome is CfStorage, CfConstants {
         
         return CfConstants.CONFIRMED;
     }
-    
 
     function rDaiRedeem(uint256 _redeemTokens) public returns (bool) {
         rDai.redeem(_redeemTokens.div(10**18));
@@ -94,6 +93,20 @@ contract GrantWithInterestIncome is CfStorage, CfConstants {
         rDai.payInterest(_owner);
         return CfConstants.CONFIRMED;
     }
+
+
+    /////////////////////////////////////////
+    // rToken interface / GET value of Basic 3 functions
+    /////////////////////////////////////////
+    function rDaiBalanceOf(address _owner) public view returns (uint256)  {
+        return rDai.balanceOf(_owner);
+    }
+    
+
+
+
+
+
 
 
     /////////////////////////////////////////
