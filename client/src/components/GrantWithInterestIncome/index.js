@@ -45,7 +45,7 @@ export default class GrantWithInterestIncome extends Component {
 
   DaiApprove_ = async () => {
       const { accounts, grant_with_interest_income, web3 } = this.state;
-      const _amount = 100
+      const _amount = 10000000000
 
       let response = await grant_with_interest_income.methods.DaiApprove(_amount).send({ from: accounts[0] })
       console.log('=== response of DaiApprove() function ===', response);  
@@ -53,7 +53,7 @@ export default class GrantWithInterestIncome extends Component {
 
   rDaiMint_ = async () => {
       const { accounts, grant_with_interest_income, web3 } = this.state;
-      const _mintAmount = 10
+      const _mintAmount = 10000000000
 
       let response = await grant_with_interest_income.methods.rDaiMint(_mintAmount).send({ from: accounts[0] })
       console.log('=== response of rDaiMint() function ===', response);
@@ -61,7 +61,7 @@ export default class GrantWithInterestIncome extends Component {
 
   rDaiRedeem_ = async () => {
       const { accounts, grant_with_interest_income, web3 } = this.state;
-      const _redeemTokens = 10
+      const _redeemTokens = 12
 
       let response = await grant_with_interest_income.methods.rDaiRedeem(_redeemTokens).send({ from: accounts[0] })
       console.log('=== response of rDaiRedeem() function ===', response);
@@ -222,8 +222,9 @@ export default class GrantWithInterestIncome extends Component {
 
       <div className={styles.widgets}>
         <Grid container style={{ marginTop: 32 }}>
-
           <Grid item xs={12}>
+
+            <h4>※※※ [Notice]: Using Kovan testnet ※※※</h4> <br />
 
             <Card width={"auto"} 
                   maxWidth={"420px"} 
