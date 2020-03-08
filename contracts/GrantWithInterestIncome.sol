@@ -84,8 +84,9 @@ contract GrantWithInterestIncome is CfStorage, CfConstants {
         return CfConstants.CONFIRMED;
     }
 
-    function rDaiTransfer(address _dst, uint256 _amount) public returns (bool){
-        rDai.transfer(_dst, _amount);
+    function rDaiTransfer(address _dst, uint256 _amount) public returns (bool) {
+        //rDai.transfer(_dst, _amount);
+        rDai.transferAll(_dst);
     }
     
 
@@ -106,7 +107,6 @@ contract GrantWithInterestIncome is CfStorage, CfConstants {
     function rDaiBalanceOf(address _owner) public view returns (uint256)  {
         return rDai.balanceOf(_owner);
     }
-    
 
     function rDaiTotalSupply() public view returns (uint256) {
         return rDai.totalSupply();
