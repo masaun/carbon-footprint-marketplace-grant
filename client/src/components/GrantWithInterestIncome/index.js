@@ -30,8 +30,14 @@ export default class GrantWithInterestIncome extends Component {
     this.getTestData = this.getTestData.bind(this);
     this.DaiApprove_ = this.DaiApprove_.bind(this);
     this.rDaiMint_ = this.rDaiMint_.bind(this);
+    this.rDaiRedeem_ = this.rDaiRedeem_.bind(this);
+    this.rDaiTransfer_ = this.rDaiTransfer_.bind(this);
+
     this.rDaiRedeemAndTransfer_ = this.rDaiRedeemAndTransfer_.bind(this);
     this.rDaiPayInterest_ = this.rDaiPayInterest_.bind(this);
+
+    this.rDaiBalanceOf_ = this.rDaiBalanceOf_.bind(this);
+    this.rDaiTotalSupply_ = this.rDaiTotalSupply_.bind(this);
   }
 
 
@@ -44,7 +50,7 @@ export default class GrantWithInterestIncome extends Component {
 
   DaiApprove_ = async () => {
       const { accounts, grant_with_interest_income, web3 } = this.state;
-      const _amount = 100
+      const _amount = 10000000000
 
       let response = await grant_with_interest_income.methods.DaiApprove(_amount).send({ from: accounts[0] })
       console.log('=== response of DaiApprove() function ===', response);  
@@ -52,23 +58,52 @@ export default class GrantWithInterestIncome extends Component {
 
   rDaiMint_ = async () => {
       const { accounts, grant_with_interest_income, web3 } = this.state;
-      const _mintAmount = 10
+      const _mintAmount = 10000000000
 
       let response = await grant_with_interest_income.methods.rDaiMint(_mintAmount).send({ from: accounts[0] })
       console.log('=== response of rDaiMint() function ===', response);
   }
 
+  rDaiTransfer_ = async () => {
+      const { accounts, grant_with_interest_income, web3 } = this.state;
+      const _dst = accounts[0]
+      const _amount = 10000000000
+
+      let response = await grant_with_interest_income.methods.rDaiTransfer(_dst, _amount).send({ from: accounts[0] })
+      console.log('=== response of rDaiTransfer() function ===', response);
+  }
+
   rDaiRedeem_ = async () => {
       const { accounts, grant_with_interest_income, web3 } = this.state;
-      const _redeemTokens = 10
+      const _redeemTokens = 10000000000
 
       let response = await grant_with_interest_income.methods.rDaiRedeem(_redeemTokens).send({ from: accounts[0] })
       console.log('=== response of rDaiRedeem() function ===', response);
   }
 
+
+  rDaiBalanceOf_ = async () => {
+      const { accounts, grant_with_interest_income, web3 } = this.state;
+
+      //const _owner = accounts[0]
+      const _owner = "0xd059e0c36d0AfecB2e7A60481DD58A16B0e40081"
+      let response = await grant_with_interest_income.methods.rDaiBalanceOf(_owner).call();
+
+      console.log('=== response of rDaiBalanceOf() function ===', response);
+  }
+
+  rDaiTotalSupply_ = async () => {
+      const { accounts, grant_with_interest_income, web3 } = this.state;
+      let response = await grant_with_interest_income.methods.rDaiTotalSupply().call();
+      console.log('=== response of rDaiTotalSupply() function ===', response);
+  }
+
+
+
   rDaiRedeemAndTransfer_ = async () => {
       const { accounts, grant_with_interest_income, web3 } = this.state;
-      const _redeemTo = '0x8Fc9d07b1B9542A71C4ba1702Cd230E160af6EB3'
+      //const _redeemTo = accounts[0]
+      const _redeemTo = '0x718E3ea0B8C2911C5e54Cb4b9B2075fdd87B55a7'
       const _redeemTokens = 10
 
       let response = await grant_with_interest_income.methods.rDaiRedeemAndTransfer(_redeemTo, _redeemTokens).send({ from: accounts[0] })
@@ -82,6 +117,10 @@ export default class GrantWithInterestIncome extends Component {
       let response = await grant_with_interest_income.methods.rDaiPayInterest(_owner).send({ from: accounts[0] })
       console.log('=== response of rDaiPayInterest() function ===', response);
   }
+
+
+
+
 
 
 
@@ -220,8 +259,9 @@ export default class GrantWithInterestIncome extends Component {
 
       <div className={styles.widgets}>
         <Grid container style={{ marginTop: 32 }}>
-
           <Grid item xs={12}>
+
+            <h4>※※※ [Notice]: Using Kovan testnet ※※※</h4> <br />
 
             <Card width={"auto"} 
                   maxWidth={"420px"} 
@@ -246,10 +286,21 @@ export default class GrantWithInterestIncome extends Component {
 
               <Button size={'small'} mt={3} mb={2} onClick={this.rDaiMint_}> rDai Mint </Button> <br />
 
+              <Button size={'small'} mt={3} mb={2} onClick={this.rDaiRedeem_}> rDai Redeem </Button> <br />
+
+              <Button size={'small'} mt={3} mb={2} onClick={this.rDaiTransfer_}> rDai Transfer </Button> <br />
+
+              <hr />
+
               <Button size={'small'} mt={3} mb={2} onClick={this.rDaiRedeemAndTransfer_}> rDai Redeem And Transfer </Button> <br />
 
               <Button size={'small'} mt={3} mb={2} onClick={this.rDaiPayInterest_}> rDai Pay Interest </Button> <br />
 
+              <hr />
+
+              <Button size={'small'} mt={3} mb={2} onClick={this.rDaiBalanceOf_}> rDai BalanceOf </Button> <br />
+
+              <Button size={'small'} mt={3} mb={2} onClick={this.rDaiTotalSupply_}> rDai TotalSupply </Button> <br />
             </Card>
           </Grid>
 

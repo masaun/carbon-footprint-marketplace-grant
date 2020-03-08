@@ -77,8 +77,18 @@ contract GrantWithInterestIncome is CfStorage, CfConstants {
 
     function rDaiMint(uint256 _mintAmount) public returns (bool) {
         rDai.mint(_mintAmount.div(10**18));
+
+        // @dev - Transfer minted rToken to contract
+        //rDai.transfer(address(this), _mintAmount);
+        
         return CfConstants.CONFIRMED;
     }
+
+    function rDaiTransfer(address _dst, uint256 _amount) public returns (bool) {
+        //rDai.transfer(_dst, _amount);
+        rDai.transferAll(_dst);
+    }
+    
 
     function rDaiRedeem(uint256 _redeemTokens) public returns (bool) {
         rDai.redeem(_redeemTokens.div(10**18));
@@ -89,6 +99,23 @@ contract GrantWithInterestIncome is CfStorage, CfConstants {
         rDai.payInterest(_owner);
         return CfConstants.CONFIRMED;
     }
+
+
+    /////////////////////////////////////////
+    // rToken interface / GET value of Basic 3 functions
+    /////////////////////////////////////////
+    function rDaiBalanceOf(address _owner) public view returns (uint256)  {
+        return rDai.balanceOf(_owner);
+    }
+
+    function rDaiTotalSupply() public view returns (uint256) {
+        return rDai.totalSupply();
+    }
+    
+
+
+
+
 
 
     /////////////////////////////////////////
