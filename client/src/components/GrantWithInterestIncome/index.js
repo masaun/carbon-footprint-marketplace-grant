@@ -66,6 +66,8 @@ export default class GrantWithInterestIncome extends Component {
 
   rDaiTransfer_ = async () => {
       const { accounts, grant_with_interest_income, web3 } = this.state;
+
+      //const _dst = grant_with_interest_income._address
       const _dst = accounts[0]
       const _amount = 10000000000
 
@@ -75,9 +77,10 @@ export default class GrantWithInterestIncome extends Component {
 
   rDaiRedeem_ = async () => {
       const { accounts, grant_with_interest_income, web3 } = this.state;
+      const _redeemTo = accounts[0]
       const _redeemTokens = 10000000000
 
-      let response = await grant_with_interest_income.methods.rDaiRedeem(_redeemTokens).send({ from: accounts[0] })
+      let response = await grant_with_interest_income.methods.rDaiRedeem(_redeemTo, _redeemTokens).send({ from: accounts[0] })
       console.log('=== response of rDaiRedeem() function ===', response);
   }
 
