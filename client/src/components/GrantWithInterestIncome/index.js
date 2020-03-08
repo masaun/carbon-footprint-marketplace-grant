@@ -280,15 +280,15 @@ export default class GrantWithInterestIncome extends Component {
                 src="https://source.unsplash.com/random/1280x720"
               />
 
-              <Button size={'small'} mt={3} mb={2} onClick={this.getTestData}> Get TestData </Button> <br />
+              <Button size={'small'} mt={3} mb={2} onClick={this.getTestData}> Get TestData（○）</Button> <br />
 
-              <Button size={'small'} mt={3} mb={2} onClick={this.DaiApprove_}> Dai Approve </Button> <br />
+              <Button size={'small'} mt={3} mb={2} onClick={this.DaiApprove_}> Dai Approve（○）</Button> <br />
 
-              <Button size={'small'} mt={3} mb={2} onClick={this.rDaiMint_}> rDai Mint </Button> <br />
+              <Button size={'small'} mt={3} mb={2} onClick={this.rDaiMint_}> rDai Mint（○）</Button> <br />
 
-              <Button size={'small'} mt={3} mb={2} onClick={this.rDaiRedeem_}> rDai Redeem </Button> <br />
+              <Button size={'small'} mt={3} mb={2} onClick={this.rDaiTransfer_}> rDai Transfer（○）</Button> <br />
 
-              <Button size={'small'} mt={3} mb={2} onClick={this.rDaiTransfer_}> rDai Transfer </Button> <br />
+              <Button size={'small'} mt={3} mb={2} onClick={this.rDaiRedeem_}> rDai Redeem（×）</Button> <br />
 
               <hr />
 
