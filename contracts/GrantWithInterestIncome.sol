@@ -90,8 +90,10 @@ contract GrantWithInterestIncome is CfStorage, CfConstants {
     }
     
 
-    function rDaiRedeem(uint256 _redeemTokens) public returns (bool) {
-        rDai.redeem(_redeemTokens.div(10**18));
+    function rDaiRedeem(address _redeemTo, uint256 _redeemTokens) public returns (bool) {
+        //rDai.redeem(_redeemTokens.div(10**18));
+        //rDai.redeemAll();
+        rDai.redeemAndTransferAll(_redeemTo)
         return CfConstants.CONFIRMED;
     }
 

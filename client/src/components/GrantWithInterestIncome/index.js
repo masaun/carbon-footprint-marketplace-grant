@@ -66,6 +66,8 @@ export default class GrantWithInterestIncome extends Component {
 
   rDaiTransfer_ = async () => {
       const { accounts, grant_with_interest_income, web3 } = this.state;
+
+      //const _dst = grant_with_interest_income._address
       const _dst = accounts[0]
       const _amount = 10000000000
 
@@ -75,9 +77,10 @@ export default class GrantWithInterestIncome extends Component {
 
   rDaiRedeem_ = async () => {
       const { accounts, grant_with_interest_income, web3 } = this.state;
+      const _redeemTo = accounts[0]
       const _redeemTokens = 10000000000
 
-      let response = await grant_with_interest_income.methods.rDaiRedeem(_redeemTokens).send({ from: accounts[0] })
+      let response = await grant_with_interest_income.methods.rDaiRedeem(_redeemTo, _redeemTokens).send({ from: accounts[0] })
       console.log('=== response of rDaiRedeem() function ===', response);
   }
 
@@ -280,15 +283,15 @@ export default class GrantWithInterestIncome extends Component {
                 src="https://source.unsplash.com/random/1280x720"
               />
 
-              <Button size={'small'} mt={3} mb={2} onClick={this.getTestData}> Get TestData </Button> <br />
+              <Button size={'small'} mt={3} mb={2} onClick={this.getTestData}> Get TestData（○）</Button> <br />
 
-              <Button size={'small'} mt={3} mb={2} onClick={this.DaiApprove_}> Dai Approve </Button> <br />
+              <Button size={'small'} mt={3} mb={2} onClick={this.DaiApprove_}> Dai Approve（○）</Button> <br />
 
-              <Button size={'small'} mt={3} mb={2} onClick={this.rDaiMint_}> rDai Mint </Button> <br />
+              <Button size={'small'} mt={3} mb={2} onClick={this.rDaiMint_}> rDai Mint（○）</Button> <br />
 
-              <Button size={'small'} mt={3} mb={2} onClick={this.rDaiRedeem_}> rDai Redeem </Button> <br />
+              <Button size={'small'} mt={3} mb={2} onClick={this.rDaiTransfer_}> rDai Transfer（○）</Button> <br />
 
-              <Button size={'small'} mt={3} mb={2} onClick={this.rDaiTransfer_}> rDai Transfer </Button> <br />
+              <Button size={'small'} mt={3} mb={2} onClick={this.rDaiRedeem_}> rDai Redeem（×）</Button> <br />
 
               <hr />
 
