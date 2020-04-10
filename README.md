@@ -1,4 +1,4 @@
-# Carbon Footprint Marketplace Grant
+# Carbon Footprint Marketplace Grant（Grant with interest income）
 
 ***
 ## 【Introduction of Carbon Footprint Marketplace Grant】
@@ -71,7 +71,7 @@ $ npm run client
 
 2. Access to browser by using link 
 ```
-http://127.0.0.1:3000
+http://127.0.0.1:3000/grant_with_interest_income
 ```
 
 &nbsp;
