@@ -84,7 +84,7 @@ http://127.0.0.1:3000
     - Carbon Footprint（SDG #7 Affordable and Clean Energy SDG #13 Climate Action）
         https://gitcoin.co/issue/blockchainforsocialimpact/incubator/1/4016
 
-- SDGs Report 2019
+- SDGs Report 2019  
     https://unstats.un.org/sdgs/report/2019/
 
 
@@ -116,6 +116,6 @@ http://127.0.0.1:3000
 <br>
 
 - [Oasis.app]
-  - For getting DAI on kovan testnet.
+  - For getting DAI on kovan testnet  
     https://oasis.app/borrow?network=kovan
 
