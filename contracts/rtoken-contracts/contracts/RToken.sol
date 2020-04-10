@@ -602,7 +602,7 @@ contract RToken is
      */
     function redeemInternal(address redeemTo, uint256 redeemAmount) internal {
         Account storage account = accounts[msg.sender];
-        require(redeemAmount > 0, "Redeem amount cannot be zero");
+        //require(redeemAmount > 0, "Redeem amount cannot be zero");
         require(
             redeemAmount <= account.rAmount,
             "Not enough balance to redeem"
