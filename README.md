@@ -1,4 +1,4 @@
-# Carbon Footprint Marketplace Grant
+# Carbon Footprint Marketplace Grant（Grant with interest income）
 
 ***
 ## 【Introduction of Carbon Footprint Marketplace Grant】
@@ -46,7 +46,7 @@ https://metamask.io/
 
 2. Adjust appropriate newwork below 
 ```
-Ropsten Test Network
+Kovan Test Network
 ```
 
 &nbsp;
@@ -71,7 +71,7 @@ $ npm run client
 
 2. Access to browser by using link 
 ```
-http://127.0.0.1:3000
+http://127.0.0.1:3000/grant_with_interest_income
 ```
 
 &nbsp;
@@ -80,6 +80,14 @@ http://127.0.0.1:3000
 ***
 
 ## 【References】  
+- Decentralized Impact Incubator (Gitcoin Hackathon)
+    - Carbon Footprint（SDG #7 Affordable and Clean Energy SDG #13 Climate Action）
+        https://gitcoin.co/issue/blockchainforsocialimpact/incubator/1/4016
+
+- SDGs Report 2019  
+    https://unstats.un.org/sdgs/report/2019/
+
+
 - `e-gas` project by Audi        
     https://www.audi-technology-portal.de/en/mobility-for-the-future/audi-future-lab-mobility_en/audi-future-energies_en/audi-e-gas_en
 
@@ -87,22 +95,27 @@ http://127.0.0.1:3000
 
 
 - [rDAI]  
-  - [Use Case]
-    https://app.rdai.money
-    https://rtrees.dappy.dev
-    https://highpriests.rdai.money
+  - [Use Case]  
+    - https://app.rdai.money  
+    - https://rtrees.dappy.dev  
+    - https://highpriests.rdai.money  
 
   - [rDAI / Tutorial]
     - rDAI Basics: A Tutorial on Programming Interest with DeFi  
       https://medium.com/@victorrortvedt/rdai-basics-a-tutorial-on-programming-interest-with-defi-458baab9477a
 
-  - rtoken-contracts：  
+  - rtoken-contracts  
     https://github.com/rtoken-project/rtoken-contracts 
 
-  - rDAI explorer：  
+  - rDAI explorer  
     https://explorer.rdai.money
 
   - Video of rDAI with eth.build  
     https://www.youtube.com/watch?v=nEC2kadoLms
 
+<br>
+
+- [Oasis.app]
+  - For getting DAI on kovan testnet  
+    https://oasis.app/borrow?network=kovan
 
