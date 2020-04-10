@@ -46,7 +46,7 @@ https://metamask.io/
 
 2. Adjust appropriate newwork below 
 ```
-Ropsten Test Network
+Kovan Test Network
 ```
 
 &nbsp;
@@ -95,22 +95,27 @@ http://127.0.0.1:3000
 
 
 - [rDAI]  
-  - [Use Case]
-    https://app.rdai.money
-    https://rtrees.dappy.dev
-    https://highpriests.rdai.money
+  - [Use Case]  
+    - https://app.rdai.money  
+    - https://rtrees.dappy.dev  
+    - https://highpriests.rdai.money  
 
   - [rDAI / Tutorial]
     - rDAI Basics: A Tutorial on Programming Interest with DeFi  
       https://medium.com/@victorrortvedt/rdai-basics-a-tutorial-on-programming-interest-with-defi-458baab9477a
 
-  - rtoken-contracts：  
+  - rtoken-contracts  
     https://github.com/rtoken-project/rtoken-contracts 
 
-  - rDAI explorer：  
+  - rDAI explorer  
     https://explorer.rdai.money
 
   - Video of rDAI with eth.build  
     https://www.youtube.com/watch?v=nEC2kadoLms
 
+<br>
+
+- [Oasis.app]
+  - For getting DAI on kovan testnet.
+    https://oasis.app/borrow?network=kovan
 
